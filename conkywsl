@@ -42,6 +42,7 @@ ${color #88C0D0}IP (eth0):${color} ${addr eth0}
 ${color #88C0D0}Down (eth0):${color} ${downspeedf eth0} MiB/s
 ${color #81A1C1}Up (eth0):${color} ${upspeedf eth0} MiB/s
 
+Twingate Status: ${if_match "${execi 10 twingate status}" == "online"}${color #8FBCBB}Online${else}${if_match "${execi 10 twingate status}" == "not-running"}${color #81A1C1}Not Running${else}${color white}Unknown Status${endif}${endif}
 
 ${color #D8DEE9}${execi 600 lsb_release -d | awk -F"\t" '{print $2}'}
 ]];
