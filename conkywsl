@@ -1,0 +1,47 @@
+conky.config = {
+    alignment = 'top_left',
+    background = false,
+    double_buffer = true,
+    update_interval = 1,
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 150, -- Adjust transparency (0 = fully transparent, 255 = fully opaque)
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    gap_x = 50,
+    gap_y = 50,
+    use_xft = true,
+    font = 'Ubuntu:size=20',
+    xftalpha = 0.7, -- Increased transparency for the text
+    override_utf8_locale = true,
+    default_color = '#D8DEE9', -- Nord Polar Night
+    minimum_width = 250, -- Slightly wider to accommodate more text
+    minimum_height = 150, -- Slightly taller for better spacing
+    draw_shades = false, -- Disable text shadows for a cleaner look
+    draw_outline = false, -- Disable text outline
+    draw_borders = false, -- Disable borders
+    draw_graph_borders = false, -- Disable graph borders
+    default_graph_width = 200,
+    default_graph_height = 25,
+    border_inner_margin = 10, -- Add margin to the content
+    border_outer_margin = 10, -- Add margin to the content
+    own_window_colour = '#2E3440', -- Nord Polar Night background color (invisible with transparency)
+    no_buffers = true,
+};
+
+conky.text = [[
+${font Ubuntu:bold:size=24}${color #88C0D0}${time %B %d}${color}
+${font Ubuntu:bold:size=36}${color #81A1C1}${time %I:%M %p}${color}
+
+${font Ubuntu:size=20}${color #8FBCBB}Weather:${color} ${execi 600 curl -s 'wttr.in/?format=%C+%t'}
+
+${color #88C0D0}IP (eth0):${color} ${addr eth0}
+
+
+${color #88C0D0}Down (eth0):${color} ${downspeedf eth0} MiB/s
+${color #81A1C1}Up (eth0):${color} ${upspeedf eth0} MiB/s
+
+
+${color #D8DEE9}${execi 600 lsb_release -d | awk -F"\t" '{print $2}'}
+]];
